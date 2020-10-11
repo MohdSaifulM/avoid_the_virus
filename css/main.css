@@ -49,8 +49,19 @@
 
 .player{
     position: absolute;
-    height: 50px;
+    height: auto;
     width: 50px;
-    background-color: red;
-    border-radius: 3rem;
+    /* background-color: red; */
+    /* border-radius: 3rem; */
+    content: url(/images/PinClipart.com_free-clip-art-faces_110730.png);
 }
+
+.problem {
+    position: absolute;
+    height: 70px;
+    width: 70px;
+    /* background-color: royalblue; */
+    content: url(/images/thediplomat-2020-04-01.png);
+    
+}
+
