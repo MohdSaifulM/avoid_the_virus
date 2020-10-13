@@ -12,6 +12,44 @@
     width: 800px;
 }
 
+.btn {
+    border: 3px solid red;
+    border-radius: 1rem;
+    position: relative;
+    height: 100px;
+    width: 200px;
+    background-color: black;
+}
+
+.btn h3 {
+    margin-top: 40px;
+    /* display: flex;
+    justify-content: center; */
+    font-family: 'Press Start 2P', cursive;
+    text-align: center;
+    color: red;
+    font-size: 1rem;
+    z-index: 0;
+}
+
+.start {
+    position: absolute;
+    margin-top: 300px;
+    margin-left: 50px;
+}
+
+.instructions {
+    position: absolute;
+    margin-top: 300px;
+    margin-left: 300px;
+}
+
+.highscore {
+    position: absolute;
+    margin-top: 300px;
+    margin-left: 550px;
+}
+
 .game {
     border: 1px solid black;
     cursor: none;
@@ -23,6 +61,29 @@
     color: red;
     padding-top: 100px;
     text-align: center;
+}
+
+#game_over {
+    display: none;
+}
+
+.reset {
+    display: none;
+    text-align: center;
+    margin-left: 300px;
+    margin-top: 100px;
+}
+
+.quote p {
+    padding-top: 20px;
+}
+
+.quote {
+    display: none;
+    color: red;
+    text-align: center;
+    margin-top: 50px;
+    font-family: 'Press Start 2P', cursive;
 }
 
 .animate__zoomIn {
@@ -40,14 +101,14 @@
     background-color: lightgrey;
 }
 
-.innerbox{
+.innerbox {
     position: fixed;
     margin-top: 50px;
     height: 650px;
     width: 650px;
 }
 
-.player{
+.player {
     position: absolute;
     height: auto;
     width: 50px;
@@ -62,5 +123,64 @@
     width: 70px;
     /* background-color: royalblue; */
     content: url(/images/thediplomat-2020-04-01.png);
-    
+    animation-iteration-count: 0;
+}
+
+.score {
+    color: black;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 1rem;
+    width: 800px;
+    height: 100px;
+    margin: 0 auto;
+    padding-top: 15px;
+}
+
+.high_score {
+    background-color: black;
+    margin: 0 auto;
+    width: 800px;
+    height: 800px;
+}
+
+.high_score h3 {
+    color: red;
+    font-family: 'Press Start 2P', cursive;
+    text-align: center;
+    padding-top: 100px;
+}
+
+h1 {
+    color: red;
+    font-family: 'Press Start 2P', cursive;
+    text-align: center;
+    padding-top: 100px;
+    font-size: 3rem;
+}
+
+.back {
+    margin-left: 300px;
+    margin-top: 150px;
+
+}
+
+.back h3 {
+    position: relative;
+    bottom: 100px;
+}
+
+.instruct {
+    background-color: black;
+    margin: 0 auto;
+    width: 800px;
+    height: 800px;
+}
+
+.instruct p {
+    color: red;
+    font-family: 'Press Start 2P', cursive;
+    text-align: left;
+    padding-top: 50px;
+    padding-left: 30px;
+    font-size: 2rem;
 }

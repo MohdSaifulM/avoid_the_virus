@@ -7,25 +7,47 @@
     <title>Avoid the virus</title>
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="node_modules/animate.css/animate.css" />
-    <link rel="stylesheet" href="node_modules/@fortawesome/fontawesome-free/css/all.css">
-    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 </head>
 
 <body>
     <div class="start_screen">
-        <div class="animate__animated animate__zoomIn main_title">AVOID THE VIRUS!!!</div> 
+        <div class="animate__animated animate__zoomIn main_title">AVOID THE VIRUS!!!</div>
+        <div class="start btn animate__animated animate__zoomIn">
+            <h3>START</h3>
+        </div>
+        <div class="instructions btn animate__animated animate__zoomIn">
+            <h3>INSTRUCTIONS</h3>
+        </div>
+        <div class="highscore btn animate__animated animate__zoomIn">
+            <h3>HIGHSCORE</h3>
+        </div>
     </div>
-    <header></header>
-    <div class="game start_screen">
+    <div class="game start_screen animate__animated animate__zoomIn">
+        <div class="animate__animated animate__fadeInDown main_title" id="game_over">GAME<br>OVER!!!</div>
+        <div class="quote animate__animated animate__jackInTheBox">
+            <p>Unlike Donald Trump,</p>
+            <p>you are not bigger than the pandemic</p>
+            <p>Please try again...</p>
+        </div>
+        <div class="reset btn animate__animated animate__zoomIn" id="reset">
+            <h3>RESET</h3>
+        </div>
         <div class="box">
             <div class="player"></div>
             <div class="innerbox"></div>
         </div>
-        <div class="start btn"></div>
-        <div class="instructions btn"></div>
-        <div class="highscore btn"></div>
     </div>
-    <footer></footer>
+    <div class="score"></div>
+    <div class="high_score">
+        <h3>Everyone's a winner</h3>
+        <h1>BUT </h1>
+    </div>
+    <div class="instruct">
+        <p>
+            Use your mouse to move <br>around and avoid the virus
+        </p>
+    </div>
     <script src="js/main.js"></script>
 </body>
 
