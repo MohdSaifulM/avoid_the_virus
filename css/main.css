@@ -123,7 +123,6 @@
     width: 70px;
     /* background-color: royalblue; */
     content: url(/images/thediplomat-2020-04-01.png);
-    animation-iteration-count: 0;
 }
 
 .score {
@@ -183,4 +182,11 @@ h1 {
     padding-top: 50px;
     padding-left: 30px;
     font-size: 2rem;
+}
+
+.powerup {
+    position: absolute;
+    height: 70px;
+    width: 70px;
+    content: url(/images/kissclipart-hand-sanitizer-icon-soap-icon-cleaning-icon-ec0765da33c77e51.png);
 }

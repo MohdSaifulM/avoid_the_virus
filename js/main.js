@@ -67,14 +67,19 @@ function createVirus() {
     arr.push($createVirus);
 }
 
-console.log(localStorage.getItem("highscore"));
-console.log(localStorage.getItem("name"));
+function createPowerUp() {
+    let $createPowerUp = document.createElement("div");
+    $createPowerUp.className = "powerup";
+    let powerID = Number($createPowerUp.id) + 2;
+    $createPowerUp.id = powerID;
+    randomMove(document.querySelector(".box").appendChild($createPowerUp));
+    arr.push($createPowerUp);
+}
 
 document.querySelector(".start_screen").style.display = "block";
 document.querySelector(".game").style.display = "none";
 document.querySelector(".high_score").style.display = "none";
 document.querySelector(".instruct").style.display = "none";
-
 
 let $start = document.querySelector(".start");
 $start.addEventListener("click", startGame);
@@ -84,9 +89,6 @@ $highscore.addEventListener("click", highScore);
 
 let $instruct = document.querySelector(".instructions");
 $instruct.addEventListener("click", instruct);
-console.log($instruct)
-
-
 
 function startGame() {
     document.querySelector(".start_screen").style.display = "none";
@@ -222,3 +224,98 @@ function instruct() {
     });
 
 }
+
+// function startGame() {
+//     document.querySelector(".start_screen").style.display = "none";
+//     document.querySelector(".game").style.display = "block";
+
+//     $box.addEventListener("mousemove", trackPlayer);
+
+//     let unleashTheVirus = setInterval(createVirus, 5000);
+
+//     let trackScore = setInterval(function () {
+//         playerScore++;
+//         document.querySelector(".score").textContent = `Score: ${playerScore}`
+//     }, 50)
+
+
+//     let checkCollide = setInterval(function () {
+
+//         let x1 = arr[0].getBoundingClientRect().x;
+//         let y1 = arr[0].getBoundingClientRect().y;
+
+//         for (let i = 1; i < arr.length; i++) {
+
+//             if (arr[i].id = "1"){
+//                 let x2 = arr[i].getBoundingClientRect().x;
+//                 let y2 = arr[i].getBoundingClientRect().y;
+    
+//                 let xDistance = x2 - x1;
+//                 let yDistance = y2 - y1;
+    
+//                 d = Math.sqrt(Math.pow(xDistance, 2) + Math.pow(yDistance, 2));
+    
+//                 if (d < 50) {
+//                     console.log("IT HITSSS");
+//                     clearInterval(unleashTheVirus);
+//                     clearInterval(checkCollide);
+//                     clearInterval(trackScore);
+    
+//                     // make hit object bigger to cover play area
+//                     arr[i].animate([
+//                         { transform: `scale(40)` },
+//                     ], {
+//                         duration: 3000,
+//                         iterations: 1,
+//                     });
+    
+//                     //log score
+//                     let $pTag = document.createElement("p");
+//                     let $playerScore = document.createTextNode(`Your final score is : ${playerScore}`);
+//                     document.querySelector(".quote").appendChild($pTag);
+//                     $pTag.appendChild($playerScore);
+    
+//                     //store highscore
+//                     if (playerScore > localStorage.getItem("highscore")) {
+//                         localStorage.setItem("highscore", playerScore);
+//                         swal("You've made the highscore, enter your name:", {
+//                             content: "input",
+//                         })
+//                             .then((value) => {
+//                                 localStorage.setItem("name", value);
+//                             });
+//                     }
+    
+//                     // game over screen appears
+//                     setTimeout(function () { document.querySelector(".box").remove(); }, 3000);
+//                     setTimeout(function () { document.querySelector(".score").style.display = "none" }, 3000);
+//                     setTimeout(function () { document.querySelector("#game_over").style.display = "block" }, 3000);
+//                     setTimeout(function () { document.querySelector(".quote").style.display = "block" }, 3000);
+//                     setTimeout(function () { document.querySelector(".reset").style.display = "block" }, 3000);
+//                     setTimeout(function () { document.querySelector(".game").style.cursor = "auto" }, 3000);
+    
+//                     //reset game
+//                     let $reset = document.getElementById("reset");
+    
+//                     $reset.addEventListener("click", function () {
+//                         window.location.reload();
+//                     });
+//                 }
+//             } else if (arr[i].id = "2"){
+//                 let x2 = arr[i].getBoundingClientRect().x;
+//                 let y2 = arr[i].getBoundingClientRect().y;
+    
+//                 let xDistance = x2 - x1;
+//                 let yDistance = y2 - y1;
+    
+//                 d = Math.sqrt(Math.pow(xDistance, 2) + Math.pow(yDistance, 2));
+    
+//                 if (d < 50) {
+//                     console.log("power UPPP");
+//                     arr[i].remove();
+//                 }
+//             }
+
+//         }
+//     }, 5);
+// }
