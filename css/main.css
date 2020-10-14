@@ -114,7 +114,7 @@
     width: 50px;
     /* background-color: red; */
     /* border-radius: 3rem; */
-    content: url(/images/PinClipart.com_free-clip-art-faces_110730.png);
+    content: url(./images/PinClipart.com_free-clip-art-faces_110730.png);
 }
 
 .virus {
@@ -122,7 +122,7 @@
     height: 70px;
     width: 70px;
     /* background-color: royalblue; */
-    content: url(/images/thediplomat-2020-04-01.png);
+    content: url(./images/thediplomat-2020-04-01.png);
 }
 
 .score {
@@ -188,5 +188,5 @@ h1 {
     position: absolute;
     height: 70px;
     width: 70px;
-    content: url(/images/kissclipart-hand-sanitizer-icon-soap-icon-cleaning-icon-ec0765da33c77e51.png);
+    content: url(./images/kissclipart-hand-sanitizer-icon-soap-icon-cleaning-icon-ec0765da33c77e51.png);
 }
