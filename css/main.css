@@ -90,6 +90,10 @@
     --animate-duration: 2s;
 }
 
+.animate__flash {
+    --animate-duration: 5s;
+}
+
 .box {
     cursor: none;
     border: 1px solid black;
