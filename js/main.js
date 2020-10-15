@@ -14,11 +14,14 @@ let playerScore = 0;
 
 let retrieve = localStorage.getItem("highscore");
 let scoreObj = JSON.parse(retrieve);
+scoreObj.sort((a, b) => (a.highscore < b.highscore) ? 1 : -1);
+scoreObj.splice(5, 1);
+console.log(scoreObj);
 
 //clear the local storage
 // localStorage.clear();
 
-console.log(localStorage.getItem("highscore"));
+
 
 // check if local storage is null, if null return with template values
 if (localStorage.getItem("highscore") === null) {
@@ -180,7 +183,7 @@ function startGame() {
                 $pTag.appendChild($playerScore);
 
                 //store highscore
-                for (let j = 0; j < 6; j++) {
+                for (let j = 0; j < scoreObj.length; j++) {
                     if (playerScore > scoreObj[j].highscore) {
                         swal("You've made the highscore, enter your name:", {
                             content: "input",
@@ -193,8 +196,6 @@ function startGame() {
                     }
                 }
 
-                // }
-
                 // game over screen appears
                 setTimeout(function () { document.querySelector(".box").remove(); }, 3000);
                 setTimeout(function () { document.querySelector(".score").style.display = "none" }, 3000);
@@ -202,6 +203,8 @@ function startGame() {
                 setTimeout(function () { document.querySelector(".quote").style.display = "block" }, 3000);
                 setTimeout(function () { document.querySelector(".reset").style.display = "block" }, 3000);
                 setTimeout(function () { document.querySelector(".game").style.cursor = "auto" }, 3000);
+
+                
 
                 //reset game
                 let $reset = document.getElementById("reset");
