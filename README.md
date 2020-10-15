@@ -6,6 +6,7 @@
 _Objective of the game: To avoid the virus that spawns randomly for as long as you can. Once player hits the virus, the game is over._ <br>
 
 <h4>Concepts used:</h4><br>
+<img src="https://eit.europa.eu/sites/default/files/eit_corona.png">
 
 **1. Event listener that tracks the mouse position and is also the position of the player**
    - For this i added an event listener to check for mousemove in the play area
@@ -38,6 +39,8 @@ _Objective of the game: To avoid the virus that spawns randomly for as long as y
   - Using the theory, I managed to detect when the player hits the virus or the other way around.
   - I also added the player and the virus into an array. The player is always at position[0]. So I only had to do a for loop from position[1] onwards to check if the player is hitting any of the virus.
   - The challenge I had with this is returning the distance from a setInterval function because I want to be always checking. However I just decided to put the collision detection inside the main game instead of a separate function outside of the game.
+  
+<img src="https://pics.ballmemes.com/a2-b2-c2-the-pythagorean-theorem-is-still-just-a-6177788.png">
  
 **5. Putting the game together: <br>** 
   - Generally, putting the functions together and create a playable game flow
@@ -52,7 +55,17 @@ _Objective of the game: To avoid the virus that spawns randomly for as long as y
       - Once the game ends a for loop will check the score against the first 5 elements, if the score is higher than any of the 5, it will be stored in an object which will then be turned into a string using JSON.stringfy() and then will be pushed to localStorage
       - In highscore screen, the score will be retrieve from localStorage and be made back into an object by using JSON.parse() and then sorted according the highest one first and the top five will be displayed on the highscore screen. 
 
+**6. Introducing to the power up: <br>** 
+   - Using the same method for spawning of elements, random movement and also calculating distance, I have added a power up
+      - I only set it to be present for 5 seconds
+      - It removes itself and 2 virus elements as well
 
+<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSbUm5Zv7meUWJr_85uOFdGVqLERd8Dn63CMw&usqp=CAU">
+
+**Furthers: <br>**
+   - I would really love to add better game physics e.g. elements bouncing against each other naturally
+   - Instead of scaling the virus so I can get to the game over screen, I would like to find a way to stop the animation. I know I can use setInterval on the randomMove() but it is being used inside the create function which I haven't found a way to use them separately and for the game to still work
+<br><br>
 
 
 **Includes sources from the following:** <br>
@@ -60,7 +73,3 @@ _Objective of the game: To avoid the virus that spawns randomly for as long as y
 - sweet alert
 - game sounds from Kenney assets
 - photos from pinclipart
-
-
-
-
