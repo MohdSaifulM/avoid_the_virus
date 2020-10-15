@@ -3,8 +3,198 @@ let $player = document.querySelector(".player");
 let $box = document.querySelector(".innerbox");
 
 let playerScore = 0;
+
+// let retrieve = localStorage.getItem("highscore");
+// let scoreObj = JSON.parse(retrieve);
+console.log(localStorage.getItem("highscore"))
+
+scoreObj = [
+    {
+        name: "AAA",
+        highscore: 100
+    },
+    {
+        name: "BBB",
+        highscore: 200
+    },
+    {
+        name: "CCC",
+        highscore: 300
+    },
+    {
+        name: "DDD",
+        highscore: 400
+    },
+    {
+        name: "EEE",
+        highscore: 500
+    }
+]
 let arr = [];
 arr.push($player);
+
+// display start screen and hide the rest
+document.querySelector(".start_screen").style.display = "block";
+document.querySelector(".game").style.display = "none";
+document.querySelector(".high_score").style.display = "none";
+
+// listen for start click
+let $start = document.querySelector(".start");
+$start.addEventListener("click", startGame);
+
+// listen for highscore click
+let $highscore = document.querySelector(".highscore");
+$highscore.addEventListener("click", highScore);
+
+function highScore() {
+    document.querySelector(".start_screen").style.display = "none";
+    document.querySelector(".score").style.display = "none";
+    document.querySelector(".high_score").style.display = "block";
+
+    //Retrieve highscore from localStorage
+    let retrieve = localStorage.getItem("highscore");
+    let scoreArr = JSON.parse(retrieve);
+    scoreArr.sort((a, b) => (a.highscore < b.highscore) ? 1 : -1);
+
+    //append text into page
+    let $p1tag = document.createElement("h3");
+    let $scoreDetails1 = document.createTextNode(`1st ${scoreArr[0].name}: ${scoreArr[0].highscore}`);
+    document.querySelector(".high_score").appendChild($p1tag);
+    $p1tag.appendChild($scoreDetails1);
+    
+    let $p2tag = document.createElement("h3");
+    let $scoreDetails2 = document.createTextNode(`2nd ${scoreArr[1].name}: ${scoreArr[1].highscore}`);
+    document.querySelector(".high_score").appendChild($p2tag);
+    $p2tag.appendChild($scoreDetails2);
+
+    let $p3tag = document.createElement("h3");
+    let $scoreDetails3 = document.createTextNode(`3rd ${scoreArr[2].name}: ${scoreArr[2].highscore}`);
+    document.querySelector(".high_score").appendChild($p3tag);
+    $p3tag.appendChild($scoreDetails3);
+
+    let $p4tag = document.createElement("h3");
+    let $scoreDetails4 = document.createTextNode(`4th ${scoreArr[3].name}: ${scoreArr[3].highscore}`);
+    document.querySelector(".high_score").appendChild($p4tag);
+    $p4tag.appendChild($scoreDetails4);
+
+    let $p5tag = document.createElement("h3");
+    let $scoreDetails5 = document.createTextNode(`5th ${scoreArr[4].name}: ${scoreArr[4].highscore}`);
+    document.querySelector(".high_score").appendChild($p5tag);
+    $p5tag.appendChild($scoreDetails5);
+
+    //append back button
+    let $div = document.createElement("div");
+    $div.className = "back btn animate__animated animate__zoomIn";
+    $div.id = "back";
+    let $htag = document.createElement("h3");
+    let $btnText = document.createTextNode("BACK");
+    document.querySelector(".high_score").appendChild($div);
+    $div.appendChild($htag)
+    $htag.appendChild($btnText);
+
+    //return to start screen
+    let $back = document.querySelector(".back");
+    $back.addEventListener("click", function () {
+        window.location.reload();
+    });
+}
+
+function startGame() {
+    document.querySelector(".start_screen").style.display = "none";
+    document.querySelector(".game").style.display = "block";
+
+    $box.addEventListener("mousemove", trackPlayer);
+
+    let unleashTheVirus = setInterval(createVirus, 5000);
+
+    let giveChance = setInterval(createPowerUp, 25000);
+
+    let trackScore = setInterval(function () {
+        playerScore++;
+        document.querySelector(".score").textContent = `Score: ${playerScore}`
+    }, 50)
+
+
+    let checkCollide = setInterval(function () {
+
+        let x1 = arr[0].getBoundingClientRect().x;
+        let y1 = arr[0].getBoundingClientRect().y;
+
+        for (let i = 1; i < arr.length; i++) {
+
+            let x2 = arr[i].getBoundingClientRect().x;
+            let y2 = arr[i].getBoundingClientRect().y;
+
+            let xDistance = x2 - x1;
+            let yDistance = y2 - y1;
+
+            d = Math.sqrt(Math.pow(xDistance, 2) + Math.pow(yDistance, 2));
+
+            if (d < 50 && arr[i].className == "virus") {
+                console.log("IT HITSSS");
+                clearInterval(unleashTheVirus);
+                clearInterval(checkCollide);
+                clearInterval(trackScore);
+                clearInterval(giveChance);
+
+                // make hit object bigger to cover play area
+                arr[i].animate([
+                    { transform: `scale(40)` },
+                ], {
+                    duration: 3000,
+                    iterations: 1,
+                });
+
+                //log score
+                let $pTag = document.createElement("p");
+                let $playerScore = document.createTextNode(`Your final score is : ${playerScore}`);
+                document.querySelector(".quote").appendChild($pTag);
+                $pTag.appendChild($playerScore);
+
+                //store highscore
+                for (let j = 0; j < scoreObj.length; j++) {
+                    if (playerScore > scoreObj[j].highscore) {
+                        swal("You've made the highscore, enter your name:", {
+                            content: "input",
+                        })
+                            .then((value) => {
+                                scoreObj.push({ name: value, highscore: playerScore })
+                                let myJSON = JSON.stringify(scoreObj);
+                                localStorage.setItem("highscore", myJSON);
+                            });
+                    }
+                }
+
+                // }
+
+                // game over screen appears
+                setTimeout(function () { document.querySelector(".box").remove(); }, 3000);
+                setTimeout(function () { document.querySelector(".score").style.display = "none" }, 3000);
+                setTimeout(function () { document.querySelector("#game_over").style.display = "block" }, 3000);
+                setTimeout(function () { document.querySelector(".quote").style.display = "block" }, 3000);
+                setTimeout(function () { document.querySelector(".reset").style.display = "block" }, 3000);
+                setTimeout(function () { document.querySelector(".game").style.cursor = "auto" }, 3000);
+
+                //reset game
+                let $reset = document.getElementById("reset");
+
+                $reset.addEventListener("click", function () {
+                    window.location.reload();
+                });
+            }
+            // check if power up is taken
+            else if (d < 50 && arr[i].className == "powerup animate__animated animate__flash") {
+                console.log("power UPPP");
+                arr[i].remove();
+                arr[i - 1].remove();
+                arr[i - 2].remove();
+                playerScore = playerScore + 50;
+            } else if (d > 50 && arr[i].className == "powerup animate__animated animate__flash") {
+                setTimeout(function () { arr[i].remove() }, 5000);
+            }
+        }
+    }, 5);
+}
 
 function trackPlayer(e) {
     let left = e.offsetX;
@@ -87,242 +277,3 @@ function createPowerUp() {
     arr.push($createPowerUp);
 }
 
-document.querySelector(".start_screen").style.display = "block";
-document.querySelector(".game").style.display = "none";
-document.querySelector(".high_score").style.display = "none";
-document.querySelector(".instruct").style.display = "none";
-
-let $start = document.querySelector(".start");
-$start.addEventListener("click", startGame);
-
-let $highscore = document.querySelector(".highscore");
-$highscore.addEventListener("click", highScore);
-
-let $instruct = document.querySelector(".instructions");
-$instruct.addEventListener("click", instruct);
-
-// function startGame() {
-//     document.querySelector(".start_screen").style.display = "none";
-//     document.querySelector(".game").style.display = "block";
-
-//     $box.addEventListener("mousemove", trackPlayer);
-
-//     let unleashTheVirus = setInterval(createVirus, 5000);
-
-//     let trackScore = setInterval(function () {
-//         playerScore++;
-//         document.querySelector(".score").textContent = `Score: ${playerScore}`
-//     }, 50)
-
-
-//     let checkCollide = setInterval(function () {
-
-//         let x1 = arr[0].getBoundingClientRect().x;
-//         let y1 = arr[0].getBoundingClientRect().y;
-
-//         for (let i = 1; i < arr.length; i++) {
-
-//             let x2 = arr[i].getBoundingClientRect().x;
-//             let y2 = arr[i].getBoundingClientRect().y;
-
-//             let xDistance = x2 - x1;
-//             let yDistance = y2 - y1;
-
-//             d = Math.sqrt(Math.pow(xDistance, 2) + Math.pow(yDistance, 2));
-
-//             if (d < 50) {
-//                 console.log("IT HITSSS");
-//                 clearInterval(unleashTheVirus);
-//                 clearInterval(checkCollide);
-//                 clearInterval(trackScore);
-
-//                 // make hit object bigger to cover play area
-//                 arr[i].animate([
-//                     { transform: `scale(40)` },
-//                 ], {
-//                     duration: 3000,
-//                     iterations: 1,
-//                 });
-
-//                 //log score
-//                 let $pTag = document.createElement("p");
-//                 let $playerScore = document.createTextNode(`Your final score is : ${playerScore}`);
-//                 document.querySelector(".quote").appendChild($pTag);
-//                 $pTag.appendChild($playerScore);
-
-//                 //store highscore
-//                 if (playerScore > localStorage.getItem("highscore")) {
-//                     localStorage.setItem("highscore", playerScore);
-//                     swal("You've made the highscore, enter your name:", {
-//                         content: "input",
-//                     })
-//                         .then((value) => {
-//                             localStorage.setItem("name", value);
-//                         });
-//                 }
-
-//                 // game over screen appears
-//                 setTimeout(function () { document.querySelector(".box").remove(); }, 3000);
-//                 setTimeout(function () { document.querySelector(".score").style.display = "none" }, 3000);
-//                 setTimeout(function () { document.querySelector("#game_over").style.display = "block" }, 3000);
-//                 setTimeout(function () { document.querySelector(".quote").style.display = "block" }, 3000);
-//                 setTimeout(function () { document.querySelector(".reset").style.display = "block" }, 3000);
-//                 setTimeout(function () { document.querySelector(".game").style.cursor = "auto" }, 3000);
-
-//                 //reset game
-//                 let $reset = document.getElementById("reset");
-
-//                 $reset.addEventListener("click", function () {
-//                     window.location.reload();
-//                 });
-//             }
-//         }
-//     }, 5);
-// }
-
-function highScore() {
-    document.querySelector(".start_screen").style.display = "none";
-    document.querySelector(".score").style.display = "none";
-    document.querySelector(".high_score").style.display = "block";
-
-    //Retrieve highscore from localStorage
-    let name = localStorage.getItem("name");
-    let score = localStorage.getItem("highscore")
-
-    //append text into page
-    let $ptag = document.createElement("h3");
-    let $scoreDetails = document.createTextNode(`${name} managed to avoid the virus for awhile
-    and scored ${score}`);
-    document.querySelector(".high_score").appendChild($ptag);
-    $ptag.appendChild($scoreDetails);
-
-    //append back button
-    let $div = document.createElement("div");
-    $div.className = "back btn animate__animated animate__zoomIn"
-    let $htag = document.createElement("h3");
-    let $btnText = document.createTextNode("BACK");
-    document.querySelector(".high_score").appendChild($div);
-    $div.appendChild($htag)
-    $htag.appendChild($btnText);
-
-    //return to start screen
-    let $back = document.querySelector(".back");
-    $back.addEventListener("click", function () {
-        window.location.reload();
-    });
-}
-
-function instruct() {
-
-    document.querySelector(".start_screen").style.display = "none";
-    document.querySelector(".score").style.display = "none";
-    document.querySelector(".high_score").style.display = "none";
-    document.querySelector(".instruct").style.display = "block";
-
-    //append back button
-    let $div = document.createElement("div");
-    $div.className = "ins back btn animate__animated animate__zoomIn"
-    let $htag = document.createElement("h3");
-    let $btnText = document.createTextNode("BACK");
-    document.querySelector(".instruct").appendChild($div);
-    $div.appendChild($htag)
-    $htag.appendChild($btnText);
-
-    //return to start screen
-    let $back = document.querySelector(".back");
-    $back.addEventListener("click", function () {
-        window.location.reload();
-    });
-
-}
-
-function startGame() {
-    document.querySelector(".start_screen").style.display = "none";
-    document.querySelector(".game").style.display = "block";
-
-    $box.addEventListener("mousemove", trackPlayer);
-
-    let unleashTheVirus = setInterval(createVirus, 5000);
-
-    let giveChance = setInterval(createPowerUp, 25000);
-
-    let trackScore = setInterval(function () {
-        playerScore++;
-        document.querySelector(".score").textContent = `Score: ${playerScore}`
-    }, 50)
-
-
-    let checkCollide = setInterval(function () {
-
-        let x1 = arr[0].getBoundingClientRect().x;
-        let y1 = arr[0].getBoundingClientRect().y;
-
-        for (let i = 1; i < arr.length; i++) {
-
-            let x2 = arr[i].getBoundingClientRect().x;
-            let y2 = arr[i].getBoundingClientRect().y;
-
-            let xDistance = x2 - x1;
-            let yDistance = y2 - y1;
-
-            d = Math.sqrt(Math.pow(xDistance, 2) + Math.pow(yDistance, 2));
-
-            if (d < 50 && arr[i].className == "virus") {
-                console.log("IT HITSSS");
-                clearInterval(unleashTheVirus);
-                clearInterval(checkCollide);
-                clearInterval(trackScore);
-                clearInterval(giveChance);
-
-                // make hit object bigger to cover play area
-                arr[i].animate([
-                    { transform: `scale(40)` },
-                ], {
-                    duration: 3000,
-                    iterations: 1,
-                });
-
-                //log score
-                let $pTag = document.createElement("p");
-                let $playerScore = document.createTextNode(`Your final score is : ${playerScore}`);
-                document.querySelector(".quote").appendChild($pTag);
-                $pTag.appendChild($playerScore);
-
-                //store highscore
-                if (playerScore > localStorage.getItem("highscore")) {
-                    localStorage.setItem("highscore", playerScore);
-                    swal("You've made the highscore, enter your name:", {
-                        content: "input",
-                    })
-                        .then((value) => {
-                            localStorage.setItem("name", value);
-                        });
-                }
-
-                // game over screen appears
-                setTimeout(function () { document.querySelector(".box").remove(); }, 3000);
-                setTimeout(function () { document.querySelector(".score").style.display = "none" }, 3000);
-                setTimeout(function () { document.querySelector("#game_over").style.display = "block" }, 3000);
-                setTimeout(function () { document.querySelector(".quote").style.display = "block" }, 3000);
-                setTimeout(function () { document.querySelector(".reset").style.display = "block" }, 3000);
-                setTimeout(function () { document.querySelector(".game").style.cursor = "auto" }, 3000);
-
-                //reset game
-                let $reset = document.getElementById("reset");
-
-                $reset.addEventListener("click", function () {
-                    window.location.reload();
-                });
-            }
-            else if (d < 50 && arr[i].className == "powerup animate__animated animate__flash") {
-                console.log("power UPPP");
-                arr[i].remove();
-                arr[i-1].remove();
-                arr[i-2].remove();
-                playerScore = playerScore + 50;
-            } else if (d > 50 && arr[i].className == "powerup animate__animated animate__flash") {
-                setTimeout(function(){arr[i].remove()}, 5000);
-            }
-        }
-    }, 5);
-}
