@@ -15,6 +15,9 @@ let playerScore = 0;
 let retrieve = localStorage.getItem("highscore");
 let scoreObj = JSON.parse(retrieve);
 
+//clear the local storage
+// localStorage.clear();
+
 console.log(localStorage.getItem("highscore"));
 
 // check if local storage is null, if null return with template values
@@ -114,8 +117,8 @@ function highScore() {
     let $back = document.querySelector(".back");
     $back.addEventListener("click", function () {
         backSound.play();
-        
-        setTimeout(function() {window.location.reload()}, 100);
+
+        setTimeout(function () { window.location.reload() }, 100);
 
     });
 }
@@ -207,7 +210,7 @@ function startGame() {
 
                     backSound.play();
 
-                    setTimeout(function() {window.location.reload()}, 100);
+                    setTimeout(function () { window.location.reload() }, 100);
                 });
             }
             // check if power up is taken
@@ -315,10 +318,10 @@ function sound(src) {
     this.sound.setAttribute("controls", "none");
     this.sound.style.display = "none";
     document.body.appendChild(this.sound);
-    this.play = function(){
-      this.sound.play();
+    this.play = function () {
+        this.sound.play();
     }
-    this.stop = function(){
-      this.sound.pause();
+    this.stop = function () {
+        this.sound.pause();
     }
-  }
+}
