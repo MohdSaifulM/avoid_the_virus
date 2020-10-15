@@ -4,32 +4,38 @@ let $box = document.querySelector(".innerbox");
 
 let playerScore = 0;
 
-// let retrieve = localStorage.getItem("highscore");
-// let scoreObj = JSON.parse(retrieve);
-console.log(localStorage.getItem("highscore"))
+let retrieve = localStorage.getItem("highscore");
+let scoreObj = JSON.parse(retrieve);
 
-scoreObj = [
-    {
-        name: "AAA",
-        highscore: 100
-    },
-    {
-        name: "BBB",
-        highscore: 200
-    },
-    {
-        name: "CCC",
-        highscore: 300
-    },
-    {
-        name: "DDD",
-        highscore: 400
-    },
-    {
-        name: "EEE",
-        highscore: 500
-    }
-]
+console.log(localStorage.getItem("highscore"));
+
+if (localStorage.getItem("highscore") === null) {
+    let scoreObj = [
+        {
+            name: "AAA",
+            highscore: 100
+        },
+        {
+            name: "BBB",
+            highscore: 200
+        },
+        {
+            name: "CCC",
+            highscore: 300
+        },
+        {
+            name: "DDD",
+            highscore: 400
+        },
+        {
+            name: "EEE",
+            highscore: 500
+        }
+    ]
+    let scoreJSON = JSON.stringify(scoreObj);
+    localStorage.setItem("highscore", scoreJSON);
+}
+
 let arr = [];
 arr.push($player);
 
@@ -61,7 +67,7 @@ function highScore() {
     let $scoreDetails1 = document.createTextNode(`1st ${scoreArr[0].name}: ${scoreArr[0].highscore}`);
     document.querySelector(".high_score").appendChild($p1tag);
     $p1tag.appendChild($scoreDetails1);
-    
+
     let $p2tag = document.createElement("h3");
     let $scoreDetails2 = document.createTextNode(`2nd ${scoreArr[1].name}: ${scoreArr[1].highscore}`);
     document.querySelector(".high_score").appendChild($p2tag);
