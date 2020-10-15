@@ -55,7 +55,7 @@ _Objective of the game: To avoid the virus that spawns randomly for as long as y
       - Once the game ends a for loop will check the score against the first 5 elements, if the score is higher than any of the 5, it will be stored in an object which will then be turned into a string using JSON.stringfy() and then will be pushed to localStorage
       - In highscore screen, the score will be retrieve from localStorage and be made back into an object by using JSON.parse() and then sorted according the highest one first and the top five will be displayed on the highscore screen. 
 
-**6. Introducing to the power up: <br>** 
+**6. Introducing the power up: <br>** 
    - Using the same method for spawning of elements, random movement and also calculating distance, I have added a power up
       - I only set it to be present for 5 seconds
       - It removes itself and 2 virus elements as well
