@@ -2,13 +2,30 @@ let $virus = document.querySelector(".virus");
 let $player = document.querySelector(".player");
 let $box = document.querySelector(".innerbox");
 
+class Sound {
+    constructor(src) {
+        this.sound = document.createElement("audio");
+        this.sound.src = src;
+        this.sound.setAttribute("preload", "auto");
+        this.sound.setAttribute("controls", "none");
+        this.sound.style.display = "none";
+        document.body.appendChild(this.sound);
+        this.play = function () {
+            this.sound.play();
+        };
+        this.stop = function () {
+            this.sound.pause();
+        };
+    }
+}
+
 // declare game sounds
-let acceptSound = new sound("../audio/confirmation_002.ogg");
-let backSound = new sound("../audio/back_001.ogg");
-let virusSound = new sound("../audio/pluck_001.ogg");
-let powerSound = new sound("../audio/drop_001.ogg");
-let loseSound = new sound("../audio/error_008.ogg");
-let powerAppear = new sound("../audio/maximize_001.ogg");
+let acceptSound = new Sound("../audio/confirmation_002.ogg");
+let backSound = new Sound("../audio/back_001.ogg");
+let virusSound = new Sound("../audio/pluck_001.ogg");
+let powerSound = new Sound("../audio/drop_001.ogg");
+let loseSound = new Sound("../audio/error_008.ogg");
+let powerAppear = new Sound("../audio/maximize_001.ogg");
 
 let playerScore = 0;
 
@@ -314,17 +331,3 @@ function createPowerUp() {
     powerAppear.play();
 }
 
-function sound(src) {
-    this.sound = document.createElement("audio");
-    this.sound.src = src;
-    this.sound.setAttribute("preload", "auto");
-    this.sound.setAttribute("controls", "none");
-    this.sound.style.display = "none";
-    document.body.appendChild(this.sound);
-    this.play = function () {
-        this.sound.play();
-    }
-    this.stop = function () {
-        this.sound.pause();
-    }
-}
