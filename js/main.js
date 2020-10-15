@@ -180,7 +180,7 @@ function startGame() {
                 $pTag.appendChild($playerScore);
 
                 //store highscore
-                for (let j = 0; j < scoreObj.length; j++) {
+                for (let j = 0; j < 6; j++) {
                     if (playerScore > scoreObj[j].highscore) {
                         swal("You've made the highscore, enter your name:", {
                             content: "input",
