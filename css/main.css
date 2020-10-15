@@ -19,13 +19,21 @@
     height: 100px;
     width: 200px;
     background-color: black;
+    color: red;
 }
+
+.btn:hover {
+    border: 3px black;
+    background-color: red;
+    color: black;
+    transform: scale(1.4);
+}
+
 
 .btn h3 {
     margin-top: 40px;
     font-family: 'Press Start 2P', cursive;
     text-align: center;
-    color: red;
     font-size: 1rem;
     z-index: 0;
 }
@@ -61,6 +69,7 @@
 
 .reset {
     display: none;
+    position: absolute;
     text-align: center;
     margin-left: 300px;
     margin-top: 100px;
@@ -146,19 +155,25 @@
 }
 
 .back {
+    position: absolute;
     margin-left: 300px;
     margin-top: 150px;
-
 }
+
 
 .back h3 {
     position: relative;
     bottom: 100px;
 }
 
+.back h3:hover {
+    color: black;
+}
+
 #back {
     padding-top: 60px;
 }
+
 
 .instruct {
     background-color: black;

@@ -2,6 +2,14 @@ let $virus = document.querySelector(".virus");
 let $player = document.querySelector(".player");
 let $box = document.querySelector(".innerbox");
 
+// declare game sounds
+let acceptSound = new sound("../audio/confirmation_002.ogg");
+let backSound = new sound("../audio/back_001.ogg");
+let virusSound = new sound("../audio/pluck_001.ogg");
+let powerSound = new sound("../audio/drop_001.ogg");
+let loseSound = new sound("../audio/error_008.ogg");
+let powerAppear = new sound("../audio/maximize_001.ogg");
+
 let playerScore = 0;
 
 let retrieve = localStorage.getItem("highscore");
@@ -9,6 +17,7 @@ let scoreObj = JSON.parse(retrieve);
 
 console.log(localStorage.getItem("highscore"));
 
+// check if local storage is null, if null return with template values
 if (localStorage.getItem("highscore") === null) {
     let scoreObj = [
         {
@@ -53,6 +62,9 @@ let $highscore = document.querySelector(".highscore");
 $highscore.addEventListener("click", highScore);
 
 function highScore() {
+
+    acceptSound.play();
+
     document.querySelector(".start_screen").style.display = "none";
     document.querySelector(".score").style.display = "none";
     document.querySelector(".high_score").style.display = "block";
@@ -101,11 +113,17 @@ function highScore() {
     //return to start screen
     let $back = document.querySelector(".back");
     $back.addEventListener("click", function () {
-        window.location.reload();
+        backSound.play();
+        
+        setTimeout(function() {window.location.reload()}, 100);
+
     });
 }
 
 function startGame() {
+
+    acceptSound.play();
+
     document.querySelector(".start_screen").style.display = "none";
     document.querySelector(".game").style.display = "block";
 
@@ -137,6 +155,7 @@ function startGame() {
             d = Math.sqrt(Math.pow(xDistance, 2) + Math.pow(yDistance, 2));
 
             if (d < 50 && arr[i].className == "virus") {
+                loseSound.play();
                 console.log("IT HITSSS");
                 clearInterval(unleashTheVirus);
                 clearInterval(checkCollide);
@@ -185,11 +204,15 @@ function startGame() {
                 let $reset = document.getElementById("reset");
 
                 $reset.addEventListener("click", function () {
-                    window.location.reload();
+
+                    backSound.play();
+
+                    setTimeout(function() {window.location.reload()}, 100);
                 });
             }
             // check if power up is taken
             else if (d < 50 && arr[i].className == "powerup animate__animated animate__flash") {
+                powerSound.play();
                 console.log("power UPPP");
                 arr[i].remove();
                 arr[i - 1].remove();
@@ -273,6 +296,7 @@ function createVirus() {
     $createVirus.id = uniqueID;
     randomMove(document.querySelector(".box").appendChild($createVirus));
     arr.push($createVirus);
+    virusSound.play();
 }
 
 function createPowerUp() {
@@ -281,5 +305,20 @@ function createPowerUp() {
     $createPowerUp.id = "2";
     randomMove(document.querySelector(".box").appendChild($createPowerUp));
     arr.push($createPowerUp);
+    powerAppear.play();
 }
 
+function sound(src) {
+    this.sound = document.createElement("audio");
+    this.sound.src = src;
+    this.sound.setAttribute("preload", "auto");
+    this.sound.setAttribute("controls", "none");
+    this.sound.style.display = "none";
+    document.body.appendChild(this.sound);
+    this.play = function(){
+      this.sound.play();
+    }
+    this.stop = function(){
+      this.sound.pause();
+    }
+  }
