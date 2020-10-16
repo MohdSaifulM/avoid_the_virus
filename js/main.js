@@ -29,12 +29,6 @@ let powerAppear = new Sound("../audio/maximize_001.ogg");
 
 let playerScore = 0;
 
-let retrieve = localStorage.getItem("highscore");
-let scoreObj = JSON.parse(retrieve);
-scoreObj.sort((a, b) => (a.highscore < b.highscore) ? 1 : -1);
-scoreObj.splice(5, 1);
-console.log(scoreObj);
-
 //clear the local storage
 // localStorage.clear();
 
@@ -67,6 +61,12 @@ if (localStorage.getItem("highscore") === null) {
     let scoreJSON = JSON.stringify(scoreObj);
     localStorage.setItem("highscore", scoreJSON);
 }
+
+let retrieve = localStorage.getItem("highscore");
+let scoreObj = JSON.parse(retrieve);
+scoreObj.sort((a, b) => (a.highscore < b.highscore) ? 1 : -1);
+scoreObj.splice(5, 1);
+console.log(scoreObj);
 
 let arr = [];
 arr.push($player);
