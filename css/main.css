@@ -1,0 +1,190 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.start_screen {
+    margin: 0 auto;
+    background-color: black;
+    height: 800px;
+    width: 800px;
+}
+
+.btn {
+    border: 3px solid red;
+    border-radius: 1rem;
+    position: relative;
+    height: 100px;
+    width: 200px;
+    background-color: black;
+    color: red;
+}
+
+.btn:hover {
+    border: 3px black;
+    background-color: red;
+    color: black;
+    transform: scale(1.4);
+}
+
+
+.btn h3 {
+    margin-top: 40px;
+    font-family: 'Press Start 2P', cursive;
+    text-align: center;
+    font-size: 1rem;
+    z-index: 0;
+}
+
+.start {
+    position: absolute;
+    margin-top: 300px;
+    margin-left: 150px;
+}
+
+.highscore {
+    position: absolute;
+    margin-top: 300px;
+    margin-left: 450px;
+}
+
+.game {
+    border: 1px solid black;
+    cursor: none;
+}
+
+.main_title {
+    font-family: 'Press Start 2P', cursive;
+    font-size: 3rem;
+    color: red;
+    padding-top: 100px;
+    text-align: center;
+}
+
+#game_over {
+    display: none;
+}
+
+.reset {
+    display: none;
+    position: absolute;
+    text-align: center;
+    margin-left: 300px;
+    margin-top: 100px;
+}
+
+.quote p {
+    padding-top: 20px;
+}
+
+.quote {
+    display: none;
+    color: red;
+    text-align: center;
+    margin-top: 50px;
+    font-family: 'Press Start 2P', cursive;
+}
+
+.animate__zoomIn {
+    --animate-duration: 2s;
+}
+
+.animate__flash {
+    --animate-duration: 5s;
+}
+
+.box {
+    cursor: none;
+    border: 1px solid black;
+    position: fixed;
+    margin-left: 50px;
+    margin-top: 50px;
+    height: 700px;
+    width: 700px;
+    background-color: lightgrey;
+}
+
+.innerbox {
+    position: fixed;
+    margin-top: 50px;
+    height: 650px;
+    width: 650px;
+}
+
+.player {
+    position: absolute;
+    height: auto;
+    width: 50px;
+    /* background-color: red; */
+    /* border-radius: 3rem; */
+    content: url(../images/PinClipart.com_free-clip-art-faces_110730.png);
+}
+
+.virus {
+    position: absolute;
+    height: 70px;
+    width: 70px;
+    /* background-color: royalblue; */
+    content: url(../images/PinClipart.com_bookworm-clipart_5253972.png);
+}
+
+.score {
+    color: black;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 1rem;
+    width: 800px;
+    height: 100px;
+    margin: 0 auto;
+    padding-top: 15px;
+}
+
+.high_score {
+    background-color: black;
+    margin: 0 auto;
+    width: 800px;
+    height: 800px;
+}
+
+.high_score h3 {
+    color: red;
+    font-family: 'Press Start 2P', cursive;
+    text-align: center;
+    padding-top: 40px;
+}
+
+.back {
+    position: absolute;
+    margin-left: 300px;
+    margin-top: 150px;
+}
+
+
+.back h3 {
+    position: relative;
+    bottom: 100px;
+}
+
+.back h3:hover {
+    color: black;
+}
+
+#back {
+    padding-top: 60px;
+}
+
+
+.instruct {
+    background-color: black;
+    margin: 0 auto;
+    width: 800px;
+    height: 800px;
+}
+
+.powerup {
+    position: absolute;
+    height: 70px;
+    width: 70px;
+    content: url(../images/kissclipart-hand-sanitizer-icon-soap-icon-cleaning-icon-ec0765da33c77e51.png);
+}
